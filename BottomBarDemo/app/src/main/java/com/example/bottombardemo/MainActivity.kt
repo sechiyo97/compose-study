@@ -56,10 +56,10 @@ fun NavigationHost(navController: NavHostController) {
         composable(NavRoutes.Home.route) {
             Home()
         }
-        composable(NavRoutes.Home.route) {
+        composable(NavRoutes.Contacts.route) {
             Contacts()
         }
-        composable(NavRoutes.Home.route) {
+        composable(NavRoutes.Favorites.route) {
             Favorites()
         }
     }
