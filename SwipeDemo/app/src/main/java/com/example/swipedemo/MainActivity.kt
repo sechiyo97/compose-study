@@ -42,17 +42,15 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val parentBoxWidth = 320.dp
     val childBoxSides = 30.dp
-    val paddings = 20.dp
 
     val swipeableState = rememberSwipeableState(initialValue = "L")
     val widthPx = with(LocalDensity.current) {
-        (parentBoxWidth - paddings*2).toPx()
+        parentBoxWidth.toPx()
     }
     val anchors = mapOf(0f to "L", widthPx/2 to "C", widthPx to "R")
 
     Box(
         modifier = Modifier
-            .padding(paddings)
             .width(parentBoxWidth)
             .height(childBoxSides)
             .swipeable(
@@ -62,15 +60,15 @@ fun MainScreen() {
                 orientation = Orientation.Horizontal
             )
     ) {
-        Box (Modifier.fillMaxWidth().height(5.dp).background(Color.DarkGray).align(Alignment.CenterStart))
-        Box (Modifier.size(10.dp).background(Color.DarkGray, shape = CircleShape).align(Alignment.CenterStart))
-        Box (Modifier.size(10.dp).background(Color.DarkGray).align(Alignment.Center))
-        Box (Modifier.size(10.dp).background(Color.DarkGray, shape = CircleShape).align(Alignment.CenterEnd))
+        Box (Modifier.fillMaxWidth().height(5.dp).background(Color.DarkGray).align(Alignment.TopStart))
+        Box (Modifier.size(10.dp).background(Color.DarkGray, shape = CircleShape).align(Alignment.TopStart))
+        Box (Modifier.size(10.dp).background(Color.DarkGray).align(Alignment.TopCenter))
+        Box (Modifier.size(10.dp).background(Color.DarkGray, shape = CircleShape).align(Alignment.TopEnd))
 
     }
     Box(Modifier.fillMaxWidth()) {
         Box(Modifier
-            .offset { IntOffset(swipeableState.offset.value.roundToInt(), 0) }
+            .offset { IntOffset(parentBoxWidth.toPx().toInt(), 0) }
             .size(childBoxSides)
             .background(Color.Blue),
             contentAlignment = Alignment.Center
@@ -84,7 +82,7 @@ fun MainScreen() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 400)
 @Composable
 fun DefaultPreview() {
     SwipeDemoTheme {
